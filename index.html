@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: "nic7pin";
+            src: url(nic7pin-Regular.otf) format("opentype")
+        }
+        :root {
+            --color: #ffca00;
+            color-scheme: dark;
+        }
+        body {
+            margin: auto;
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            height: 100dvh;
+            justify-content: center;
+            background: black;
+            font-size: 18px;
+        }
+        div {
+            background: #241706;
+        }
+        .flex {
+            display: flex;
+            gap: 5px;
+        }
+        * {
+            font-family: "nic7pin", monospace;
+            font-size: inherit;
+            line-height: 1;
+            color: var(--color);
+        }
+        button {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            text-align: left;
+        }
+        button, select, fieldset {
+            color: inherit;
+            border: 1px solid currentColor;
+            background: transparent;
+        }
+        button:disabled {
+            color: gray;
+        }
+        button:not(:disabled), select {
+            cursor: pointer;
+        }
+        *:focus {
+            outline: none;
+            color: white;
+        }
+        button:not(:disabled):active {
+            background: var(--color);
+            color: black;
+        }
+        select {
+            height: 1.5em;
+        }
+        fieldset {
+            width: fit-content;
+        }
+        dialog {
+            padding: 0;
+            max-width: 20em;
+            border: none;
+            overflow: visible;
+            background: transparent;
+        }
+        dialog::backdrop {
+            background-color: black;
+        }
+        dialog::after {
+            content: "esc or click to close dialog";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, 1em);
+            white-space: pre;
+            color: gray;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        park station
+    </div>
+    <br>
+    <div class="flex">
+        <fieldset>
+            <legend>ticket machine</legend>
+            <form onchange="check_filled()">
+                <div>
+                    from<br>
+                    <select name="" id="location_select">
+                        <option disabled selected value="">(pick a station...)</option>
+                        <option value="park">park</option>
+                        <option value="work">work</option>
+                        <option value="home">home</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    destination<br>
+                    <select name="" id="destination_select">
+                        <option disabled selected value="">(pick a station...)</option>
+                        <option value="park">park</option>
+                        <option value="work">work</option>
+                        <option value="home">home</option>
+                    </select>
+                </div>
+                <br>
+                <button type="button" id="buy_button" onclick="buy_ticket()" disabled>buy ticket (?c)</button>
+            </form>
+        </fieldset>
+        <fieldset>
+            <legend>platform (park)</legend>
+            <div>
+                the platform is empty.
+            </div>
+            <br>
+            <div class="flex" style="max-width: 25em; align-items: flex-start">
+                <button type="button">check your pockets</button>
+                <button type="button">switch platform</button>
+                <button type="button">look at map</button>
+                <button type="button">look at timetable</button>
+            </div>
+        </fieldset>
+    </div>
+    
+    <dialog id="dialogue" closedby="any"></dialog>
+    
+</body>
+
+<script>
+    var me = {
+        money: 0
+    }
+
+    function calculate_cost(from, to) {
+        let cost = 0;
+        if (to == "work")
+            cost = 0;
+        else if (to == "park")
+            cost = 1;
+        else if (to == "home")
+            cost = 100;
+        return cost;
+    }
+
+    function check_filled() {
+        const from = location_select.value;
+        const to = destination_select.value;
+        if (from && to && from != to) {
+            buy_button.textContent = `buy ticket (${calculate_cost(from, to)}c)`;
+            buy_button.removeAttribute("disabled");
+        } else {
+            buy_button.textContent = "buy ticket (?c)";
+            buy_button.setAttribute("disabled", true)
+        }
+    }
+
+    function say(text) {
+        dialogue.innerHTML = text;
+        dialogue.showModal();
+    }
+
+    function buy_ticket() {
+        const from = location_select.value;
+        const to = destination_select.value;
+        if (from == to) {
+            say("you can't buy a ticket that starts and ends at the same place!");
+            return;
+        }
+        const cost = calculate_cost(from, to);
+        if (cost > me.money) {
+            say("you don't have enough money to buy this ticket.");
+            return;
+        }
+        say("here's <a download='ticket' href='files/ticket.txt'>your ticket</a>!");
+        me.money -= cost;
+    }
+</script>
+
+</html>
