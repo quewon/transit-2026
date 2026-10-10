@@ -18,7 +18,9 @@ function template(name) {
     if (t) {
         const fragment = document.importNode(t.content, true);
 
-        if (name == "rando") {
+        if (name.includes("station_") && name.includes("_exit")) {
+            fragment.querySelector("video").play();
+        } else if (name == "rando") {
             const rando = RANDOS[Math.floor(Math.random() * RANDOS.length)];
             fragment.querySelector("img").src = "res/images/" + rando.image;
             fragment.querySelector("img").title = rando.title;
