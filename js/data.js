@@ -2,6 +2,7 @@ var current_location;
 var current_job;
 var money = 0;
 var tickets = {};
+var total_spent = 0;
 
 if (localStorage.getItem("current_job"))
     current_job = JSON.parse(localStorage.getItem("current_job"));
@@ -9,6 +10,8 @@ if (localStorage.getItem("money"))
     money = parseInt(localStorage.getItem("money"));
 if (localStorage.getItem("tickets"))
     tickets = JSON.parse(localStorage.getItem("tickets"));
+if (localStorage.getItem("total_spent"))
+    total_spent = parseInt(localStorage.getItem("total_spent"));
 
 const MESSAGE = {
     parts: [

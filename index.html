@@ -271,12 +271,12 @@
     setup_ticket_machine();
 
     function start_game() {
+        if (!current_job) create_next_job();
         if (localStorage.getItem("current_location")) {
             current_location = locations[parseInt(localStorage.getItem("current_location"))];
             current_location.enter();
         } else
-            subway.stations[localStorage.getItem("current_station") || 'n'].enter();
-        if (!current_job) create_next_job();
+            subway.stations[localStorage.getItem("current_station") || current_job.start_station].enter();
 
         update_time();
         setTimeout(() => {

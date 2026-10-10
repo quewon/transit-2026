@@ -107,7 +107,7 @@ class Train extends Location {
             localStorage.setItem("current_station", stop.to);
             this.update_description(`this stop is station ${stop.to}.`);
 
-            let ticket_checker_chance = 0.1 * subway.stations[stop.to].lines.length;
+            let ticket_checker_chance = 0.01 * subway.stations[stop.to].lines.length;
             if (Math.random() <= ticket_checker_chance) {
                 this.ticket_checker_timeout = setTimeout(() => {
                     ticket_checker_dialogue();

@@ -1,5 +1,5 @@
 const subway = {
-    train_wait_time: 60,
+    train_wait_time: 20,
     train_speed: 10, //per square
     map: [],
     lines: [],
