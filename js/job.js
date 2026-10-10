@@ -16,7 +16,7 @@ function create_next_job() {
         const end_station = end_pool[Math.floor(Math.random() * end_pool.length)];
 
         if (!current_job) {
-            dialogue_noclose.innerHTML = "your next job is waiting for you at the exit of station " + start_station + ".<br><br>remember this--you will not be able to request this information again.<br><br><button type='button' onclick='dialogue_noclose.close()'>ok</button>";
+            dialogue_noclose.innerHTML = "your next job is waiting for you at the exit of station " + start_station + ".<br><br><button type='button' onclick='dialogue_noclose.close()'>ok</button>";
             dialogue_noclose.showModal();
         } else {
             dialogue_noclose.innerHTML = "thanks. you have a friend waiting for you at station " + start_station + ".<br><br><button type='button' onclick='dialogue_noclose.close()'>ok</button>";

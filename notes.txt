@@ -4,9 +4,12 @@
 - [x] ticket buying
 - [x] ticket checkers
 - sounds
-- typewriter effect
+- typewriter effect?
 - [x] keyboard controls
 - [x] localstorage remember what location you were at
+- varied dialogue
+- multiple jobs at the same time
+- note about being able to come back to the game whenever u want
 
 potential bugs
 - trains should go back and forth (not teleport to the start of the line)
