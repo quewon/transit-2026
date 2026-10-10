@@ -1,7 +1,0 @@
-train ticket
-
-valid for : 1 day (DD/MM/YYYY)
-from : X
-to : Y
-
-this ticket has been issued and validated by XXXX

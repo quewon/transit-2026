@@ -1,0 +1,16 @@
+#map {
+    white-space: pre;
+    width: fit-content;
+    user-select: none;
+    color: gray;
+}
+#map legend {
+    color: var(--text);
+}
+#map span {
+    color: var(--text);
+}
+#map span.current-position {
+    background: var(--text);
+    color: var(--background);
+}

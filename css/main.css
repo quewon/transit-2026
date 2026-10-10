@@ -1,0 +1,191 @@
+@font-face {
+    font-family: "nic7pin";
+    src: url(nic7pin-Regular.otf) format("opentype")
+}
+
+:root {
+    --font: "nic7pin", monospace;
+    --background: white;
+    --button-background: white;
+    --button-text: black;
+    --text: black;
+    --focus: red;
+}
+body.depth0 div, body.depth3 div {
+    background: var(--background);
+}
+body.depth3 {
+    --background: black;
+    --button-background: black;
+    --button-text: white;
+    --text: white;
+    --focus: yellow;
+}
+body.depth3 button:has(> img) img {
+    filter: invert();
+}
+body.depth3 button:has(img):focus::after {
+    mix-blend-mode: darken;
+}
+body.depth0 main {
+    top: 10px;
+}
+body.depth1 main {
+    top: calc((100vh - 20px) * 1/4);
+}
+body.depth2 main {
+    top: calc((100vh - 20px) * 2/4);
+}
+body.depth3 main {
+    top: calc((100vh - 20px) * 3/4);
+}
+
+body {
+    font-family: var(--font);
+    color: var(--text);
+    line-height: 0.85;
+    background: var(--background);
+}
+
+*:focus {
+    outline: none;
+}
+details:has(summary:focus) {
+    border-color: var(--focus) !important;
+}
+input:focus, select:focus, button:focus, details:has(summary:focus) summary {
+    color: var(--focus) !important;
+    border-color: var(--focus) !important;
+}
+button:has(img):focus::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--focus);
+    mix-blend-mode: lighten;
+}
+
+dialog {
+    padding: 0;
+    max-width: 20em;
+    border: none;
+    overflow: visible;
+    background: transparent;
+    /* color: var(--text); */
+    font-family: var(--font);
+    color: var(--text);
+}
+dialog::backdrop {
+    background-color: var(--background);
+}
+dialog[closedby='any']::after {
+    content: "esc or click out to close dialog";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 2em);
+    white-space: pre;
+    color: gray;
+    pointer-events: none;
+    font-style: italic;
+}
+
+main {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50em;
+    max-width: calc(100vw - 20px);
+    height: calc((100vh - 20px) / 4);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+input, select, button {
+    font-family: inherit;
+    font-size: inherit;
+    background: var(--button-background);
+    border: 1px solid gray;
+    color: var(--button-text);
+    margin: 0;
+    line-height: inherit;
+}
+select, button {
+    cursor: pointer;
+}
+select {
+    padding: 2px;
+}
+input:hover, select:hover, button:hover {
+    text-decoration: underline;
+}
+fieldset {
+    margin-left: 0;
+    margin-right: 0;
+    border: 1px solid gray;
+}
+button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+img, video {
+    width: 100%;
+    height: 100%;
+    /* aspect-ratio: 1; */
+    object-fit: cover;
+    user-drag: none;
+    -webkit-user-drag: none;
+}
+*:has(> video), *:has(> img) {
+    position: relative;
+    line-height: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+button:has(> img) img {
+    max-height: 10em;
+    object-fit: scale-down;
+}
+button:has(> img), button:has(> video) {
+    border: none;
+    padding: 0;
+    line-height: 0;
+    cursor: zoom-in;
+    flex-shrink: 1;
+}
+
+details {
+    border: 1px solid var(--text);
+    width: 25em;
+    max-width: 100%;
+}
+details:not(:focus) summary {
+    color: var(--text);
+}
+details summary {
+    cursor: pointer;
+}
+
+.flex {
+    display: flex;
+    gap: 2px;
+}
+.flex.column {
+    flex-direction: column;
+}
+.bg {
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: -2;
+}
+.hidden {
+    display: none;
+}

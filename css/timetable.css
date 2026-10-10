@@ -1,0 +1,11 @@
+#timetable > div {
+    overflow: scroll;
+    max-height: 25em;
+}
+#timetable table, #timetable td {
+    border: 1px solid gray;
+}
+#timetable table {
+    border-collapse: collapse;
+    width: 20em;
+}

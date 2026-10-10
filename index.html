@@ -3,192 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        @font-face {
-            font-family: "nic7pin";
-            src: url(nic7pin-Regular.otf) format("opentype")
-        }
-        :root {
-            --color: #ffca00;
-            color-scheme: dark;
-        }
-        body {
-            margin: auto;
-            width: fit-content;
-            display: flex;
-            flex-direction: column;
-            height: 100dvh;
-            justify-content: center;
-            background: black;
-            font-size: 18px;
-        }
-        div {
-            background: #241706;
-        }
-        .flex {
-            display: flex;
-            gap: 5px;
-        }
-        * {
-            font-family: "nic7pin", monospace;
-            font-size: inherit;
-            line-height: 1;
-            color: var(--color);
-        }
-        button {
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            text-align: left;
-        }
-        button, select, fieldset {
-            color: inherit;
-            border: 1px solid currentColor;
-            background: transparent;
-        }
-        button:disabled {
-            color: gray;
-        }
-        button:not(:disabled), select {
-            cursor: pointer;
-        }
-        *:focus {
-            outline: none;
-            color: white;
-        }
-        button:not(:disabled):active {
-            background: var(--color);
-            color: black;
-        }
-        select {
-            height: 1.5em;
-        }
-        fieldset {
-            width: fit-content;
-        }
-        dialog {
-            padding: 0;
-            max-width: 20em;
-            border: none;
-            overflow: visible;
-            background: transparent;
-        }
-        dialog::backdrop {
-            background-color: black;
-        }
-        dialog::after {
-            content: "esc or click to close dialog";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translate(-50%, 1em);
-            white-space: pre;
-            color: gray;
-            pointer-events: none;
-        }
-    </style>
+    <title>asleep in a train</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/timetable.css">
 </head>
-<body>
-
-    <div>
-        park station
-    </div>
-    <br>
-    <div class="flex">
-        <fieldset>
-            <legend>ticket machine</legend>
-            <form onchange="check_filled()">
-                <div>
-                    from<br>
-                    <select name="" id="location_select">
-                        <option disabled selected value="">(pick a station...)</option>
-                        <option value="park">park</option>
-                        <option value="work">work</option>
-                        <option value="home">home</option>
-                    </select>
-                </div>
-                <br>
-                <div>
-                    destination<br>
-                    <select name="" id="destination_select">
-                        <option disabled selected value="">(pick a station...)</option>
-                        <option value="park">park</option>
-                        <option value="work">work</option>
-                        <option value="home">home</option>
-                    </select>
-                </div>
-                <br>
-                <button type="button" id="buy_button" onclick="buy_ticket()" disabled>buy ticket (?c)</button>
-            </form>
-        </fieldset>
-        <fieldset>
-            <legend>platform (park)</legend>
-            <div>
-                the platform is empty.
-            </div>
-            <br>
-            <div class="flex" style="max-width: 25em; align-items: flex-start">
-                <button type="button">check your pockets</button>
-                <button type="button">switch platform</button>
-                <button type="button">look at map</button>
-                <button type="button">look at timetable</button>
-            </div>
-        </fieldset>
-    </div>
+<body class="depth3">
     
+    <main>
+        <div class="flex" style="justify-content: space-between; background: none">
+            <div id="station_name">nowhere</div>
+            <div>[<span id="money_counter">0</span>c] <span id="time">XX:XX:XX</span></div>
+        </div>
+        <div class="flex" style="min-height: 0; align-items: flex-start; flex-grow: 1; background: none; gap: 0">
+            <!-- objects are inserted here -->
+            <div id="location_info" style="flex-grow: 1; height: 100%; background: none;" class="flex column">
+                <div class="flex" style="flex-grow: 1;">
+                    <fieldset style="flex-grow: 1;">
+                        <legend id="location_name">?</legend>
+                        <div id="location_description">in the in-between.</div>
+                    </fieldset>
+                </div>
+                <div id="location_navigation" class="flex" style="width: fit-content; align-items: flex-start"></div>
+            </div>
+            <!-- objects are inserted here -->
+        </div>
+    </main>
+
+    <button data-absolute="true" style="position: absolute; top: 40vh; left: 50%; transform: translate(-50%, -50%)" onclick="start_game()">go somewhere</button>
+
+    <template id="template_station_a_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/ball.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_b_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/concrete.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_c_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/construction.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_d_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/gates.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_e_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/stripes.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_f_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/tree.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_g_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/ball.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_h_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/concrete.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_i_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/construction.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_j_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/gates.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_k_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/stripes.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_l_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/tree.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_m_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/ball.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_n_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/concrete.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_o_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/construction.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_p_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/gates.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_station_q_exit">
+        <div data-absolute="true" class="bg">
+            <video autoplay loop name="exit image" src="res/videos/stations/stripes.webm" type="video/mov" alt="sunny day.">
+        </div>
+    </template>
+
+    <template id="template_ticket_machine">
+        <button type="button" onclick="ticket_machine.showModal()">
+            <img src="res/images/ticket machine.png" alt="ticket machine" title="ticket machine">
+        </button>
+    </template>
+
+    <template id="template_map">
+        <button type="button" onclick="open_map()">
+            <img src="res/images/map.png" alt="map" title="map of the subway">
+        </button>
+    </template>
+
+    <template id="template_timetable">
+        <button type="button" onclick="timetable.showModal()">
+            <img src="res/images/timetable.png" alt="timetable" title="timetable">
+        </button>
+    </template>
+
+    <template id="template_tunnel">
+        <div data-absolute="true" class="bg">
+            <video src="res/videos/arrival-of-a-train.mp4" alt="a train tunnel"></video>
+        </div>
+    </template>
+
+    <template id="template_train">
+        <button type="button" style="position: absolute; left: 50%; top: 40vh; transform: translate(-50%, -50%)">take the train</button>
+    </template>
+
+    <template id="template_train-inside">
+        <div data-absolute="true" class="bg">
+            <video loop src="res/videos/moving-train.webm" alt="looking out the window of a train"></video>
+        </div>
+    </template>
+
+    <template id="template_exit-button">
+        <button type="button" style="position: absolute; left: 50%; top: 40vh; transform: translate(-50%, -50%)"></button>
+    </template>
+
+    <template id="template_rando">
+        <button data-after="true" type="button" onclick="">
+            <img src="" alt="">
+        </button>
+    </template>
+
+    <template id="template_agent">
+        <button type="button" onclick="">
+            <img src="" alt="">
+        </button>
+    </template>
+
+    <template id="template_undercover-agent">
+        <button data-after="true" type="button" onclick="">
+            <img src="" alt="">
+        </button>
+    </template>
+
+    <dialog id="ticket_machine" closedby="any">
+        <div class="flex" style="align-items: flex-start">
+            <fieldset>
+                <legend>ticket machine</legend>
+                <form onchange="update_ticket_machine()">
+                    <div>
+                        from<br>
+                        <select name="" id="location_select">
+                            <option disabled selected value="">(pick a station...)</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div>
+                        destination<br>
+                        <select name="" id="destination_select">
+                            <option disabled selected value="">(pick a station...)</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="button" id="buy_button" onclick="" disabled>buy ticket (?c)</button>
+                </form>
+            </fieldset>
+            <fieldset>
+                <legend>note</legend>
+                all tickets are valid for 20 minutes only.
+            </fieldset>
+        </div>
+    </dialog>
+
+    <dialog id="map" closedby="any">
+        a..................b.......
+        .........c.................
+        ...........................
+        .d...........e.............
+        ...........f....g..........
+        ......h...........i........
+        ........j.k................
+        ...........................
+        ............l...m..........
+        ..............n...........o
+        ...........................
+        ...............p.....q.....
+
+        line 1: e-g-i-m-n-l-k-f-e
+        line 2: c-f-n-p-q
+        line 3: h-f-i-o
+        line 4: a-d-h-j-k-n-o
+        line 5: c-b
+    </dialog>
+
+    <dialog id="timetable" closedby="any"></dialog>
+
+    <dialog id="ticket_checker" closedby="none">
+        your ticket, please.<br>
+        <br>
+        <button type="button">but i don't have my ticket...</button>
+    </dialog>
+
     <dialog id="dialogue" closedby="any"></dialog>
+    <dialog id="dialogue_noclose" closedby="none"></dialog>
     
 </body>
+<script src="js/time.js"></script>
+<script src="js/locations/Location.js"></script>
+<script src="js/locations/Train.js"></script>
+<script src="js/locations/Platform.js"></script>
+<script src="js/locations/Station.js"></script>
 
+<script src="js/subway.js"></script>
+<script src="js/ticket_machine.js"></script>
+<script src="js/map.js"></script>
+<script src="js/job.js"></script>
+<script src="js/data.js"></script>
 <script>
-    var me = {
-        money: 0
-    }
+    parse_map();
+    generate_timetables();
+    generate_stations();
+    generate_trains();
+    setup_ticket_machine();
 
-    function calculate_cost(from, to) {
-        let cost = 0;
-        if (to == "work")
-            cost = 0;
-        else if (to == "park")
-            cost = 1;
-        else if (to == "home")
-            cost = 100;
-        return cost;
-    }
+    function start_game() {
+        if (localStorage.getItem("current_location")) {
+            current_location = locations[parseInt(localStorage.getItem("current_location"))];
+            current_location.enter();
+        } else
+            subway.stations[localStorage.getItem("current_station") || 'n'].enter();
+        if (!current_job) create_next_job();
 
-    function check_filled() {
-        const from = location_select.value;
-        const to = destination_select.value;
-        if (from && to && from != to) {
-            buy_button.textContent = `buy ticket (${calculate_cost(from, to)}c)`;
-            buy_button.removeAttribute("disabled");
-        } else {
-            buy_button.textContent = "buy ticket (?c)";
-            buy_button.setAttribute("disabled", true)
+        update_time();
+        setTimeout(() => {
+            update_time();
+            setInterval(update_time, 1000);
+        }, new Date() - (Math.floor(new Date() / 1000) * 1000));
+        if (!localStorage.getItem("jobs_start_time")) {
+            localStorage.setItem("jobs_start_time", new Date().getTime());
         }
-    }
-
-    function say(text) {
-        dialogue.innerHTML = text;
-        dialogue.showModal();
-    }
-
-    function buy_ticket() {
-        const from = location_select.value;
-        const to = destination_select.value;
-        if (from == to) {
-            say("you can't buy a ticket that starts and ends at the same place!");
-            return;
-        }
-        const cost = calculate_cost(from, to);
-        if (cost > me.money) {
-            say("you don't have enough money to buy this ticket.");
-            return;
-        }
-        say("here's <a download='ticket' href='files/ticket.txt'>your ticket</a>!");
-        me.money -= cost;
     }
 </script>
-
 </html>
