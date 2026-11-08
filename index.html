@@ -227,20 +227,19 @@
         </p>
         <p>
             <button onclick="
-                if (!fare_unpaid) {
-                    fare_check_menu.close(); 
-                } else { 
+                if (fare_unpaid) {
                     say('you have been fined for lying.'); 
                     sub_money(5) 
-                }" autofocus>yes</button>
+                }
+                fare_check_menu.close()" autofocus>yes</button>
             <button onclick="
                 if (!fare_unpaid) {
                     say('huh? it says here you did... you\'re free to go.'); 
-                    fare_check_menu.close(); 
                 } else { 
                     say('you have been fined for fare evasion.'); 
                     sub_money(5)
-                }">no</button>
+                }
+                fare_check_menu.close()">no</button>
         </p>
     </dialog>
     
