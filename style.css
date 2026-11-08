@@ -1,0 +1,245 @@
+body {
+    --background: black;
+    --text: white;
+    --line1: blue;
+    --line2: magenta;
+    --line3: orange;
+    --line4: green;
+    --line5: red;
+
+    background: var(--background);
+    color: var(--text);
+    color-scheme: dark;
+}
+body.depth0, body.depth1, body.depth2 {
+    --background: white;
+    --text: black;
+    color-scheme: light;
+}
+body.depth3 button:not(:hover) img {
+    filter: invert();
+}
+
+.container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 25vh;
+    width: 40em;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+fieldset {
+    overflow: scroll;
+}
+
+body.depth0 .container {
+    top: 0;
+}
+body.depth1 .container {
+    top: 25vh;
+}
+body.depth2 .container {
+    top: 50vh;
+}
+body.depth3 .container {
+    top: 75vh;
+}
+
+table {
+    width: 20em;
+    max-width: 100%;
+}
+table, tr {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+td, th {
+    padding: 5px;
+}
+
+button {
+    border: 1px solid var(--color);
+    background: var(--background);
+    color: var(--color);
+    cursor: pointer;
+    --color: var(--text);
+}
+button:hover {
+    background: yellow !important;
+    color: black !important;
+}
+button:active {
+    --color: red !important;
+    color: red !important;
+}
+
+button.line1, button.line2, button.line3, button.line4, button.line5 {
+    width: 3em;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color);
+    color: white;
+}
+
+span.line1, span.line2, span.line3, span.line4, span.line5 {
+    background: var(--color);
+    color: white;
+}
+label.line1, label.line2, label.line3, label.line4, label.line5 {
+    background: var(--color);
+    color: white;
+}
+.line1 {
+    --color: var(--line1);
+}
+.line2 {
+    --color: var(--line2);
+}
+.line3 {
+    --color: var(--line3);
+}
+.line4 {
+    --color: var(--line4);
+}
+.line5 {
+    --color: var(--line5);
+}
+
+.money {
+    border: 1px solid;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: small;
+}
+
+#navigation_up, #navigation_down {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+}
+#navigation_up {
+    bottom: 100%;
+}
+#navigation_down {
+    top: 100%;
+}
+#navigation_up button, #navigation_down button {
+    --offset: 0;
+
+    position: relative;
+    width: 3.5em;
+    text-align: center;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin-top: var(--offset);
+}
+#navigation_down button::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: var(--offset);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    background: var(--color);
+    pointer-events: none;
+    border: 1px solid var(--background);
+    z-index: -1;
+}
+#navigation_down button:nth-child(1) {
+    --offset: 3vh;
+}
+#navigation_down button:nth-child(2) {
+    --offset: 6vh;
+}
+#navigation_down button:nth-child(3) {
+    --offset: 9vh;
+}
+
+dialog {
+    border: none;
+    background: transparent;
+    color: var(--text);
+}
+dialog::backdrop {
+    background: var(--background);
+}
+#timetable {
+    max-height: 50vh;
+    overflow: scroll;
+}
+
+textarea {
+    background: transparent;
+    color: var(--text);
+}
+
+img {
+    max-height: 100%;
+    height: 10em;
+}
+
+#map {
+    white-space: pre;
+    font-family: monospace;
+    overflow: visible;
+}
+.map-station {
+    position: relative;
+    display: inline-block;
+}
+.map-station:has(.tag-bubbles) {
+    font-weight: bold;
+}
+/* .tag-bubbles {
+    position: absolute;
+    top: calc(1em + 3px);
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    gap: .25em;
+}
+.tag-bubbles > div {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text);
+    border: 1px solid var(--background);
+} */
+.map-station:hover {
+    cursor: help;
+}
+.map-station:hover::after {
+    content: attr(data-tags);
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    background: var(--background);
+    z-index: 1;
+    font-weight: normal;
+}
+
+ul {
+    margin: 0;
+}
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.hidden {
+    display: none;
+}

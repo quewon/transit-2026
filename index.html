@@ -3,221 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>asleep in a train</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/map.css">
-    <link rel="stylesheet" href="css/timetable.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="depth3">
-    
-    <main>
-        <div class="flex" style="justify-content: space-between; background: none">
-            <div id="station_name">nowhere</div>
-            <div>[<span id="money_counter">0</span>c] <span id="time">XX:XX:XX</span></div>
-        </div>
-        <div class="flex" style="min-height: 0; align-items: flex-start; flex-grow: 1; background: none; gap: 0">
-            <!-- objects are inserted here -->
-            <div id="location_info" style="flex-grow: 1; height: 100%; background: none;" class="flex column">
-                <div class="flex" style="flex-grow: 1;">
-                    <fieldset style="flex-grow: 1;">
-                        <legend id="location_name">?</legend>
-                        <div id="location_description">in the in-between.</div>
-                    </fieldset>
-                </div>
-                <div id="location_navigation" class="flex" style="width: fit-content; align-items: flex-start"></div>
-            </div>
-            <!-- objects are inserted here -->
-        </div>
-    </main>
 
-    <button data-absolute="true" style="position: absolute; top: 40vh; left: 50%; transform: translate(-50%, -50%)" onclick="start_game()">go somewhere</button>
-
-    <template id="template_station_a_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/ball.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_b_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/concrete.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_c_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/construction.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_d_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/gates.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_e_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/stripes.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_f_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/tree.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_g_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/ball.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_h_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/concrete.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_i_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/construction.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_j_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/gates.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_k_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/stripes.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_l_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/tree.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_m_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/ball.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_n_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/concrete.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_o_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/construction.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_p_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/gates.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_station_q_exit">
-        <div data-absolute="true" class="bg">
-            <video loop name="exit image" src="res/videos/stations/stripes.webm" type="video/mov" alt="sunny day.">
-        </div>
-    </template>
-
-    <template id="template_ticket_machine">
-        <button type="button" onclick="ticket_machine.showModal()">
-            <img src="res/images/ticket machine.png" alt="ticket machine" title="ticket machine">
-        </button>
-    </template>
-
-    <template id="template_map">
-        <button type="button" onclick="open_map()">
-            <img src="res/images/map.png" alt="map" title="map of the subway">
-        </button>
-    </template>
-
-    <template id="template_timetable">
-        <button type="button" onclick="timetable.showModal()">
-            <img src="res/images/timetable.png" alt="timetable" title="timetable">
-        </button>
-    </template>
-
-    <template id="template_tunnel">
-        <div data-absolute="true" class="bg">
-            <video src="res/videos/arrival-of-a-train.mp4" alt="a train tunnel"></video>
-        </div>
-    </template>
-
-    <template id="template_train">
-        <button type="button" style="position: absolute; left: 50%; top: 40vh; transform: translate(-50%, -50%)">take the train</button>
-    </template>
-
-    <template id="template_train-inside">
-        <div data-absolute="true" class="bg">
-            <video loop src="res/videos/moving-train.webm" alt="looking out the window of a train"></video>
-        </div>
-    </template>
-
-    <template id="template_exit-button">
-        <button type="button" style="position: absolute; left: 50%; top: 40vh; transform: translate(-50%, -50%)"></button>
-    </template>
-
-    <template id="template_rando">
-        <button data-after="true" type="button" onclick="">
-            <img src="" alt="">
-        </button>
-    </template>
-
-    <template id="template_agent">
-        <button type="button" onclick="">
-            <img src="" alt="">
-        </button>
-    </template>
-
-    <template id="template_undercover-agent">
-        <button data-after="true" type="button" onclick="">
-            <img src="" alt="">
-        </button>
-    </template>
-
-    <dialog id="ticket_machine" closedby="any">
-        <div class="flex" style="align-items: flex-start">
-            <fieldset>
-                <legend>ticket machine</legend>
-                <form onchange="update_ticket_machine()">
-                    <div>
-                        from<br>
-                        <select name="" id="location_select">
-                            <option disabled selected value="">(pick a station...)</option>
-                        </select>
-                    </div>
-                    <br>
-                    <div>
-                        destination<br>
-                        <select name="" id="destination_select">
-                            <option disabled selected value="">(pick a station...)</option>
-                        </select>
-                    </div>
-                    <br>
-                    <button type="button" id="buy_button" onclick="" disabled>buy ticket (?c)</button>
-                </form>
-            </fieldset>
-            <fieldset>
-                <legend>note</legend>
-                all tickets are valid for 20 minutes only.
-            </fieldset>
-        </div>
-    </dialog>
+    <!-- data -->
 
     <dialog id="map" closedby="any">
         a..................b.......
@@ -238,54 +29,230 @@
         line 3: h-f-i-o
         line 4: a-d-h-j-k-n-o
         line 5: c-b
+
+        station p: job agent
+        station n: job agent
+        station f: job agent
+        station a: job agent
     </dialog>
 
+    <!-- objects -->
+
+    <template data-object="map">
+        <button onclick="open_map()">
+            <img src="res/images/map.png" alt="map">
+        </button>
+    </template>
+
+    <template data-object="timetable">
+        <button onclick="timetable.showModal()">
+            <img src="res/images/timetable.png" alt="timetable">
+        </button>
+    </template>
     <dialog id="timetable" closedby="any"></dialog>
 
-    <dialog id="ticket_checker" closedby="none">
-        your ticket, please.<br>
-        <br>
-        <button type="button">but i don't have my ticket...</button>
+    <template data-object="agent">
+        <button onclick="offer_job(1)">
+            <img src="res/images/jobgiver1.png" alt="job agent" title="job agent">
+        </button>
+    </template>
+
+    <template data-object="agent">
+        <button onclick="offer_job(2)">
+            <img src="res/images/jobgiver2.png" alt="job agent" title="job agent">
+        </button>
+    </template>
+
+    <template data-object="agent">
+        <button onclick="offer_job(3)">
+            <img src="res/images/jobgiver3.png" alt="job agent" title="job agent">
+        </button>
+    </template>
+
+    <template data-object="rando">
+        <button onclick="say('waa!! waaaa!!')">
+            <img src="res/images/babyholder.png" alt="person holding a baby" title="person holding a baby">
+        </button>
+    </template>
+
+    <template data-object="rando">
+        <button onclick="say('...')">
+            <img src="res/images/beggar.png" alt="beggar" title="beggar">
+        </button>
+    </template>
+
+    <template data-object="rando">
+        <button onclick="say('hm')">
+            <img src="res/images/cellist.png" alt="cellist" title="cellist">
+        </button>
+    </template>
+
+    <template data-object="rando">
+        <button onclick="say('(bobs head)')">
+            <img src="res/images/earbuds.png" alt="music enjoyer" title="music enjoyer">
+        </button>
+    </template>
+
+    <template data-object="rando">
+        <button onclick="say('dad, are we there yet??')">
+            <img src="res/images/fatherandchild.png" alt="father and child" title="father and child">
+        </button>
+    </template>
+
+    <template data-object="rando">
+        <button onclick="say('ha...')">
+            <img src="res/images/officeworker.png" alt="office worker" title="office worker">
+        </button>
+    </template>
+
+    <template data-object="rando">
+        <button onclick="say('zzzzzzz')">
+            <img src="res/images/sleeper.png" alt="sleeping stranger" title="sleeping stranger">
+        </button>
+    </template>
+
+    <template data-object="rando">
+        <button onclick="say('(loud and incoherent conversation)')">
+            <img src="res/images/talker.png" alt="talking on the phone" title="talking on the phone">
+        </button>
+    </template>
+
+    <template data-object="rando">
+        <button onclick="say('so that\'s... and we\'re... and there\'s...')">
+            <img src="res/images/tourist.png" alt="tourist" title="tourist">
+        </button>
+    </template>
+
+    <template data-object="train-button">
+        <button style="
+            position: absolute;
+            top: 40vh;
+            left: 50%;
+            transform: translate(-50%, -50%)
+            ">enter train</button>
+    </template>
+
+    <template data-object="station-button">
+        <button style="
+            position: absolute;
+            top: 40vh;
+            left: 50%;
+            transform: translate(-50%, -50%)
+            ">station x</button>
+    </template>
+
+    <!-- ui -->
+     
+    <video id="tunnel_video" class="bg-video hidden" src="res/videos/tunnel.webm"></video>
+    <video id="train_video" class="bg-video hidden" src="res/videos/moving-train.webm" loop></video>
+    <video class="station-video bg-video hidden" src="res/videos/aubervilliers/1.webm" loop></video>
+    <video class="station-video bg-video hidden" src="res/videos/aubervilliers/2.webm" loop></video>
+    <video class="station-video bg-video hidden" src="res/videos/aubervilliers/3.webm" loop></video>
+    <video class="station-video bg-video hidden" src="res/videos/canada/1.webm" loop></video>
+    <video class="station-video bg-video hidden" src="res/videos/canada/2.webm" loop></video>
+    <video class="station-video bg-video hidden" src="res/videos/canada/3.webm" loop></video>
+    <video class="station-video bg-video hidden" src="res/videos/canada/4.webm" loop></video>
+    <video class="station-video bg-video hidden" src="res/videos/canada/5.webm" loop></video>
+    <video class="station-video bg-video hidden" src="res/videos/canada/6.webm" loop></video>
+
+    <div id="scene" class="container">
+        <div id="navigation_up">
+            <button onclick="start_game()">wake up</button>
+        </div>
+        <div style="display: flex; flex-grow: 1; min-height: 0; background: var(--background)">
+            <main style="flex-grow: 1; display: flex; flex-direction: column; min-width: 0">
+                <fieldset style="
+                    flex-grow: 1; 
+                    display: flex; 
+                    min-width: 0;
+                    ">
+                    <legend id="location_name">?</legend>
+                    <div id="objects_container" style="display: flex; min-width: 0">
+                        <div>
+                            hello. this is a game about navigating a subway system. this game runs in real time, even when your browser tab is closed.
+                            <br><br>
+                            you are currently asleep. click the circle above to wake up.
+                        </div>
+                    </div>
+                </fieldset>
+            </main>
+            <aside id="sidebar">
+                <fieldset>
+                    <legend>clock</legend>
+                    <code id="clock"></code>
+                </fieldset>
+                <fieldset>
+                    <legend>pockets</legend>
+                    <ul style="white-space: nowrap" id="inventory">
+                        <li>
+                            <span class="money" id="money_counter">?</span> money
+                        </li>
+                    </ul>
+                </fieldset>
+            </aside>
+        </div>
+        <div id="navigation_down"></div>
+    </div>
+
+    <dialog id="dialogue_menu" closedby="any"></dialog>
+
+    <dialog id="job_menu">
+
     </dialog>
 
-    <dialog id="dialogue" closedby="any"></dialog>
-    <dialog id="dialogue_noclose" closedby="none"></dialog>
+    <dialog id="fare_menu">
+        <p>
+            pay the fare of <span class="money">2</span>?
+        </p>
+        <p>
+            <button onclick="
+                if (money >= 2) {
+                    fare_unpaid = false; 
+                    localStorage.setItem('fare_unpaid', false); 
+                    sub_money(2);
+                } else {
+                    say('you don\'t have enough money for the fare.');
+                    localStorage.setItem('fare_unpaid', true); 
+                    current_location.navigation[0].f();
+                }
+                fare_menu.close()
+                " autofocus>yes</button>
+            <button onclick="fare_unpaid = true; localStorage.setItem('fare_unpaid', true); fare_menu.close()">no</button>
+        </p>
+    </dialog>
+
+    <dialog id="fare_check_menu">
+        <p>
+            did you pay your fare?
+        </p>
+        <p>
+            <button onclick="
+                if (!fare_unpaid) {
+                    fare_check_menu.close(); 
+                } else { 
+                    say('you have been fined for lying.'); 
+                    sub_money(5) 
+                }" autofocus>yes</button>
+            <button onclick="
+                if (!fare_unpaid) {
+                    say('huh? it says here you did... you\'re free to go.'); 
+                    fare_check_menu.close(); 
+                } else { 
+                    say('you have been fined for fare evasion.'); 
+                    sub_money(5)
+                }">no</button>
+        </p>
+    </dialog>
     
 </body>
-<script src="js/time.js"></script>
-<script src="js/locations/Location.js"></script>
-<script src="js/locations/Train.js"></script>
-<script src="js/locations/Platform.js"></script>
-<script src="js/locations/Station.js"></script>
 
-<script src="js/subway.js"></script>
-<script src="js/ticket_machine.js"></script>
-<script src="js/map.js"></script>
-<script src="js/job.js"></script>
-<script src="js/data.js"></script>
-<script>
-    parse_map();
-    generate_timetables();
-    generate_stations();
-    generate_trains();
-    setup_ticket_machine();
+<script src="scripts/Location.js"></script>
+<script src="scripts/clock.js"></script>
+<script src="scripts/map.js"></script>
+<script src="scripts/generate_subway.js"></script>
+<script src="scripts/inventory.js"></script>
+<script src="scripts/dialogue.js"></script>
+<script src="scripts/jobs.js"></script>
+<script src="scripts/game.js"></script>
 
-    function start_game() {
-        if (!current_job) create_next_job();
-        if (localStorage.getItem("current_location")) {
-            current_location = locations[parseInt(localStorage.getItem("current_location"))];
-            current_location.enter();
-        } else
-            subway.stations[localStorage.getItem("current_station") || current_job.start_station].enter();
-
-        update_time();
-        setTimeout(() => {
-            update_time();
-            setInterval(update_time, 1000);
-        }, new Date() - (Math.floor(new Date() / 1000) * 1000));
-        if (!localStorage.getItem("jobs_start_time")) {
-            localStorage.setItem("jobs_start_time", new Date().getTime());
-        }
-    }
-</script>
 </html>
