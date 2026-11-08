@@ -232,7 +232,7 @@ class Train extends Location {
         super(options);
         this.train_name = options.train_name;
         this.direction = options.direction;
-        this.objects = ["map", "timetable"];
+        this.objects = ["map", "timetable", "rando"];
     }
 
     enter() {
