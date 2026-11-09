@@ -1,15 +1,19 @@
 var money = localStorage.getItem("money") ? parseInt(localStorage.getItem("money")) : 4;
+var inventory;
 
-function add_to_inventory(item) {
+function add_to_inventory(item, ignoreLocalStorage) {
     const li = document.createElement("li");
     li.textContent = item;
     inventory.appendChild(li);
+    if (!ignoreLocalStorage)
+        localStorage.setItem("inventory", JSON.stringify(inventory));
 }
 
 function remove_from_inventory(item) {
     for (let i=0; i<inventory.children.length; i++) {
         if (inventory.children[i].textContent == item) {
             inventory.children[i].remove();
+            localStorage.setItem("inventory", JSON.stringify(inventory));
             return;
         }
     }
