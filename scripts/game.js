@@ -16,15 +16,8 @@ function start_game() {
     } else {
         subway.stations["n"].exit.enter();
     }
-    money_counter.textContent = money;
     if (localStorage.getItem("start-time") === null) {
         localStorage.setItem("start-time", get_time());
-    }
-    if (localStorage.getItem("inventory")) {
-        inventory = JSON.parse(localStorage.getItem("inventory"));
-        for (const item of inventory) {
-            add_to_inventory(item, true);
-        }
     }
     game_start_time = localStorage.getItem("start-time");
 }
